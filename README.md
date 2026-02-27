@@ -28,7 +28,7 @@ To compile the translator from the source files, open your terminal in the proje
    Use GCC to compile the generated C files, along with the data structure logic, into a single executable named `liana2xta`.
    ```bash
    gcc parser.tab.c lex.yy.c parser.c -o liana2xta
-
+   ```
    This generates `liana2xta`
 
 ## Usage
