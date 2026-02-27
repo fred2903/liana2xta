@@ -176,7 +176,7 @@ system /* this rule incorporates a very complex semantic action responsible of m
         while (clock_head) {
             c_curr = clock_head;
             clock_head = clock_head->next;
-            
+
             free(c_curr->name);
             free(c_curr);
         }
@@ -565,7 +565,7 @@ void yyerror(char *s) {
 }
 
 int main(int argc, char **argv) {
-    if (argc > 1) {
+    if (argc == 2) {
         /* open the file passed as a command-line argument */
         yyin = fopen(argv[1], "r");
         if (!yyin) {
@@ -573,9 +573,14 @@ int main(int argc, char **argv) {
             return 1;
         }
     }
-    else {
+    else if (argc == 1) {
         /* default to stdin if no file is provided */
         yyin = stdin;
+    }
+    else {
+        /* invalid number of arguments */
+        fprintf(stderr, "Error: Too many arguments\n");
+        return 1;
     }
 
     if (!yyparse()) {
