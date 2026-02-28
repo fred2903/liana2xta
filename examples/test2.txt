@@ -1,0 +1,17 @@
+create automaton key03
+{
+    clocks { x; }
+    actions { a; }
+    integers { gate; }
+    locations {
+        L0 <ini: T, urg: T>,
+        L1 <ini: F, urg: F>,
+        L2 <ini: F, urg: T>,
+        L3 <ini: F, inv: [(x, <, 8), (x, >=, 0)]>;
+    }
+    transitions {
+        (L0, a, [(x, >=, 3), (x, <=, 5)], [x], L1),
+        (L1, a, [(x, ==, 3)], gate == 6, [x], L2),
+        (L2, a, [(x, ==, 3)], [x], [gate = gate + 1 * 2], L3);
+    }
+}
