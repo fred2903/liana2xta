@@ -1,53 +1,55 @@
 # liana2xta
-Liana2XTA is a model transformation tool that translates Liana specifications into XTA models, enabling automated formal verification and analysis through model checking frameworks, while preserving the behavioral semantics
+
+**Liana2XTA** is a model transformation tool that translates Liana specifications into XTA models, enabling automated formal verification and analysis through model checking frameworks (like UPPAAL), while preserving behavioral semantics.
+
+This tool features a transparent two-stage compilation pipeline:
+1. **Translator:** parses and translates individual Liana files to self-contained XTA descriptions.
+2. **Linker:** merges multiple translated XTA components into a single cohesive XTA file representing the corresponding UPPAAL network architecture. It is required only in case of translation of multiple Liana files constituting a TA network.
 
 ## Prerequisites
-To build and run this project, you need to have the following installed on your system:
-* **Bison** (Parser generator)
-* **Flex** (Lexical analyzer generator)
-* **GCC** (GNU Compiler Collection, or any standard C compiler)
+To run this project, ensure you have the following installed on your system (standard on most Linux/macOS environments):
+* **Bash** (Bourne Again SHell)
+* **Bison** (parser generator)
+* **Flex** (Fast Lexical Analyzer Generator)
+* **GCC** (GNU Compiler Collection)
 
-## Build Instructions
-To compile the translator from the source files, open your terminal in the project directory and run the following commands in order:
+## Installation & setup
+You do not need to manually compile the C files. The provided shell script handles the build process transparently on its first run.
 
-1. **Generate the parser:**
-   Run Bison to generate the C code and the header file from the grammar specification.
+1. Clone the repository:
    ```bash
-   bison -d parser.y
+   git clone https://github.com/fred2903/liana2xta.git
+   cd liana2xta
    ```
-   This generates `parser.tab.c`
-
-2. **Generate the scanner:**
-   Run Flex to generate the C code for the lexical analyzer.
+2. Make the script executable:
    ```bash
-   flex scanner.l
+   chmod +x liana2xta.sh
    ```
-   This generates `lex.yy.c`
-
-3. **Compile the executable:**
-   Use GCC to compile the generated C files, along with the data structure logic, into a single executable named `liana2xta`.
-   ```bash
-   gcc parser.tab.c lex.yy.c parser.c -o liana2xta
-   ```
-   This generates `liana2xta`
 
 ## Usage
-Once compiled, you can use the tool to translate a Liana file into an XTA file.
+The tool is entirely driven by the `liana2xta.sh` script. It automatically detects whether you are passing a single file or a directory, handles all intermediate temporary files, and places the resulting `.xta` file right next to your input.
 
-The translator takes the Liana file as an argument (or alternatively from standard input if no argument is present) and prints the resulting XTA model to standard output. You can easily redirect this output into a new `.xta` file using the `>` operator.
-
+**Syntax:**
 ```bash
-# Basic execution (prints output directly to the terminal)
-./liana2xta input_model.liana
-
-# Standard execution (saves the output to an XTA file)
-./liana2xta input_model.liana > output_model.xta
+./liana2xta.sh [-f | --force] <file_path | directory_path>
 ```
 
-## Example
-If you have a Liana specification file named `light_switch.liana`, you can generate the UPPAAL-compatible model by running:
+### 1. Single file translation
+If you pass a single `.txt` Liana file, the script will run the Translator on it to generate the output in the same directory.
 ```bash
-./liana2xta light_switch.liana > light_switch.xta
+./liana2xta.sh examples/ex1/test1.txt
+# Output: Successfully generated: examples/ex1/test1.xta
 ```
 
-You can then open `light_switch.xta` directly in the UPPAAL model checker to perform formal verification, simulate the automaton, and verify your temporal logic queries.
+### 2. Full directory translation (network linking)
+If you pass a directory containing multiple `.txt` Liana files, the script will run the Translator on all of them independently, then call the Linker to perform the merge, and finally output a single unified `.xta` file named after the directory.
+```bash
+./liana2xta.sh examples/ex4/test4
+# Output: Successfully merged into: examples/ex4/test4.xta
+```
+
+### 3. Forcing a rebuild
+The script safely caches the compiled Translator and Linker binaries in a hidden `.build` directory to make subsequent runs instantaneous. If you modify the source `.l`, `.y`, or `.c` files, or pull a recent update, use the `-f` or `--force` flag to force a clean recompilation.
+```bash
+./liana2xta.sh -f examples/ex3/test3
+```
