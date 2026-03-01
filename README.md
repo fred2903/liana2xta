@@ -1,6 +1,6 @@
 # liana2xta
 
-**Liana2XTA** is a model transformation tool that translates Liana specifications into XTA models, enabling automated formal verification and analysis through model checking frameworks (like UPPAAL), while preserving behavioral semantics.
+**Liana2XTA** is a model transformation tool that translates Liana specifications into XTA models, enabling automated formal verification and analysis through the UPPAAL model checking framework, while preserving the original behavioral semantics.
 
 This tool features a transparent two-stage compilation pipeline:
 1. **Translator:** parses and translates individual Liana files to self-contained XTA descriptions.
