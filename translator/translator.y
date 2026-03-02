@@ -443,8 +443,10 @@ reset_list
         free($1);
     }
     | reset_list COMMA LITERAL 
-    { 
-        $$ = cat($1, ", ", $3);
+    {
+        char* temp = cat($3, " = ", "0");
+        $$ = cat($1, ", ", temp);
+        free(temp);
         free($1);
         free($3); 
     }

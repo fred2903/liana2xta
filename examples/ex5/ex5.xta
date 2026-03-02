@@ -1,0 +1,27 @@
+process Flower() {
+  clock x1, x2, x3, x4, y;
+  state
+    Start, Goal;
+  init Start;
+  trans
+    Start -> Start {
+      guard x4 == 4;
+      assign x4 = 0, x3 = 0, x2 = 0;
+    },
+    Start -> Start {
+      guard x3 == 3;
+      assign x3 = 0;
+    },
+    Start -> Start {
+      guard x2 == 2;
+      assign x2 = 0;
+    },
+    Start -> Start {
+      guard x1 == 1;
+      assign x1 = 0;
+    },
+    Start -> Goal {
+      guard x1 < 0 && x2 == 0 && x3 == 0 && x4 == 0 && y >= 1;
+    };
+}
+system Flower;
