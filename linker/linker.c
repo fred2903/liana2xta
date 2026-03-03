@@ -102,7 +102,7 @@ void print_merged_xta() {
     /* 2 - print processes */
     struct Process *p = proc_head;
     while (p) {
-        printf("process %s() {\n%s}\n\n", p->name, p->body);
+        printf("process %s() {%s}\n\n", p->name, p->body);
         p = p->next;
     }
 
