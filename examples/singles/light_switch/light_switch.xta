@@ -1,0 +1,18 @@
+chan switch_on, switch_off;
+process light_switch() {
+  clock x;
+  state
+    off, on;
+  init off;
+  trans
+    off -> on {
+      sync switch_on!;
+      guard x >= 0;
+      assign x = 0;
+    },
+    on -> off {
+      sync switch_off?;
+      guard x == 2;
+    };
+}
+system light_switch;

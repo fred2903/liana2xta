@@ -1,0 +1,1029 @@
+chan begin, busy, cd13, end, cd7, cd6, cd12, cd4, cd10, cd11, cd5, cd1, cd15, cd14, cd16, cd17, cd18, cd19, cd2, cd20, cd3, cd8, cd9;
+
+process P13() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd13?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd13?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd13?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd13?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P7() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd7?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd7?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd7?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd7?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P6() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd6?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd6?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd6?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd6?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P12() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd12?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd12?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd12?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd12?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P4() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd4?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd4?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd4?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd4?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P10() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd10?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd10?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd10?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd10?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P11() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd11?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd11?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd11?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd11?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P5() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd5?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd5?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd5?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd5?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P1() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd1?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd1?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd1?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd1?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P15() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd15?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd15?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd15?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd15?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P14() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd14?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd14?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd14?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd14?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P0() {
+
+  clock x;
+  state
+    bus_idle, bus_active, bus_collision1 { x < 26 }, bus_collision2 { x <= 0 }, bus_collision3 { x <= 0 }, bus_collision4 { x <= 0 }, bus_collision5 { x <= 0 }, bus_collision6 { x <= 0 }, bus_collision7 { x <= 0 }, bus_collision8 { x <= 0 }, bus_collision9 { x <= 0 }, bus_collision10 { x <= 0 }, bus_collision11 { x <= 0 }, bus_collision12 { x <= 0 }, bus_collision13 { x <= 0 }, bus_collision14 { x <= 0 }, bus_collision15 { x <= 0 }, bus_collision16 { x <= 0 }, bus_collision17 { x <= 0 }, bus_collision18 { x <= 0 }, bus_collision19 { x <= 0 }, bus_collision20 { x <= 0 };
+  init bus_idle;
+  trans
+    bus_idle -> bus_active {
+      sync begin?;
+      assign x = 0;
+    },
+    bus_active -> bus_idle {
+      sync end?;
+      assign x = 0;
+    },
+    bus_active -> bus_active {
+      sync busy!;
+      guard x >= 26;
+    },
+    bus_active -> bus_collision1 {
+      sync begin?;
+      guard x < 26;
+      assign x = 0;
+    },
+    bus_collision1 -> bus_collision2 {
+      sync cd1!;
+      guard x < 26;
+      assign x = 0;
+    },
+    bus_collision2 -> bus_collision3 {
+      sync cd2!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision3 -> bus_collision4 {
+      sync cd3!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision4 -> bus_collision5 {
+      sync cd4!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision5 -> bus_collision6 {
+      sync cd5!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision6 -> bus_collision7 {
+      sync cd6!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision7 -> bus_collision8 {
+      sync cd7!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision8 -> bus_collision9 {
+      sync cd8!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision9 -> bus_collision10 {
+      sync cd9!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision10 -> bus_collision11 {
+      sync cd10!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision11 -> bus_collision12 {
+      sync cd11!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision12 -> bus_collision13 {
+      sync cd12!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision13 -> bus_collision14 {
+      sync cd13!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision14 -> bus_collision15 {
+      sync cd14!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision15 -> bus_collision16 {
+      sync cd15!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision16 -> bus_collision17 {
+      sync cd16!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision17 -> bus_collision18 {
+      sync cd17!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision18 -> bus_collision19 {
+      sync cd18!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision19 -> bus_collision20 {
+      sync cd19!;
+      guard x <= 0;
+      assign x = 0;
+    },
+    bus_collision20 -> bus_idle {
+      sync cd20!;
+      guard x <= 0;
+      assign x = 0;
+    };
+}
+
+process P16() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd16?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd16?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd16?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd16?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P2() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd2?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd2?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd2?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd2?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P3() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd3?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd3?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd3?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd3?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P17() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd17?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd17?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd17?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd17?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P19() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd19?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd19?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd19?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd19?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P18() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd18?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd18?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd18?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd18?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P8() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd8?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd8?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd8?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd8?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P20() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd20?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd20?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd20?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd20?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+process P9() {
+
+  clock x;
+  state
+    sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
+  init sender_wait;
+  trans
+    sender_wait -> sender_transm {
+      sync begin!;
+      assign x = 0;
+    },
+    sender_wait -> sender_wait {
+      sync cd9?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync cd9?;
+      assign x = 0;
+    },
+    sender_wait -> sender_retry {
+      sync busy?;
+      assign x = 0;
+    },
+    sender_transm -> sender_wait {
+      sync end!;
+      guard x == 808;
+      assign x = 0;
+    },
+    sender_transm -> sender_retry {
+      sync cd9?;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_transm {
+      sync begin!;
+      guard x < 52;
+      assign x = 0;
+    },
+    sender_retry -> sender_retry {
+      sync cd9?;
+      guard x < 52;
+      assign x = 0;
+    };
+}
+
+system P13, P7, P6, P12, P4, P10, P11, P5, P1, P15, P14, P0, P16, P2, P3, P17, P19, P18, P8, P20, P9;

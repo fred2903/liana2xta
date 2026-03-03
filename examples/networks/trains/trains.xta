@@ -1,0 +1,163 @@
+int cnt;
+chan approach, texit, lower, raise;
+
+process Train04() {
+
+  clock x;
+  state
+    train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
+  init train0;
+  trans
+    train2 -> train3 {
+    },
+    train3 -> train0 {
+      sync texit?;
+      guard x <= 5;
+    },
+    train1 -> train2 {
+      guard x > 2;
+    },
+    train0 -> train1 {
+      sync approach?;
+      assign x = 0;
+    };
+}
+
+process Controller() {
+
+  clock z;
+  state
+    controller0, controller1 { z <= 1 }, controller2, controller3 { z <= 1 };
+  init controller0;
+  trans
+    controller0 -> controller1 {
+      sync approach!;
+      assign z = 0, cnt = 1;
+    },
+    controller1 -> controller1 {
+      sync approach!;
+      assign cnt = cnt + 1;
+    },
+    controller1 -> controller1 {
+      sync texit!;
+      assign cnt = cnt - 1;
+    },
+    controller2 -> controller2 {
+      sync approach!;
+      assign cnt = cnt + 1;
+    },
+    controller2 -> controller2 {
+      sync texit!;
+      guard cnt > 1;
+      assign cnt = cnt - 1;
+    },
+    controller2 -> controller3 {
+      sync texit!;
+      guard cnt == 1;
+      assign z = 0, cnt = 0;
+    },
+    controller3 -> controller0 {
+      sync raise!;
+      guard z <= 1;
+    },
+    controller3 -> controller2 {
+      sync approach!;
+      guard z <= 1;
+      assign cnt = cnt + 1;
+    },
+    controller1 -> controller2 {
+      sync lower!;
+      guard z == 1;
+    };
+}
+
+process Train03() {
+
+  clock x;
+  state
+    train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
+  init train0;
+  trans
+    train2 -> train3 {
+    },
+    train3 -> train0 {
+      sync texit?;
+      guard x <= 5;
+    },
+    train1 -> train2 {
+      guard x > 2;
+    },
+    train0 -> train1 {
+      sync approach?;
+      assign x = 0;
+    };
+}
+
+process Train02() {
+
+  clock x;
+  state
+    train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
+  init train0;
+  trans
+    train2 -> train3 {
+    },
+    train3 -> train0 {
+      sync texit?;
+      guard x <= 5;
+    },
+    train1 -> train2 {
+      guard x > 2;
+    },
+    train0 -> train1 {
+      sync approach?;
+      assign x = 0;
+    };
+}
+
+process Train01() {
+
+  clock x;
+  state
+    train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
+  init train0;
+  trans
+    train2 -> train3 {
+    },
+    train3 -> train0 {
+      sync texit?;
+      guard x <= 5;
+    },
+    train1 -> train2 {
+      guard x > 2;
+    },
+    train0 -> train1 {
+      sync approach?;
+      assign x = 0;
+    };
+}
+
+process Gate() {
+
+  clock y;
+  state
+    gate0, gate1 { y <= 1 }, gate2, gate3 { y <= 2 };
+  init gate0;
+  trans
+    gate1 -> gate2 {
+      guard y <= 1;
+    },
+    gate2 -> gate3 {
+      sync raise?;
+      assign y = 0;
+    },
+    gate0 -> gate1 {
+      sync lower?;
+      assign y = 0;
+    },
+    gate3 -> gate0 {
+      guard y >= 1 && y <= 2;
+    };
+}
+
+system Train04, Controller, Train03, Train02, Train01, Gate;
