@@ -2,7 +2,6 @@ int cnt;
 chan approach, texit, lower, raise;
 
 process Train04() {
-
   clock x;
   state
     train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
@@ -24,7 +23,6 @@ process Train04() {
 }
 
 process Controller() {
-
   clock z;
   state
     controller0, controller1 { z <= 1 }, controller2, controller3 { z <= 1 };
@@ -72,7 +70,6 @@ process Controller() {
 }
 
 process Train03() {
-
   clock x;
   state
     train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
@@ -94,7 +91,6 @@ process Train03() {
 }
 
 process Train02() {
-
   clock x;
   state
     train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
@@ -116,7 +112,6 @@ process Train02() {
 }
 
 process Train01() {
-
   clock x;
   state
     train0, train1 { x <= 5 }, train2 { x <= 5 }, train3 { x <= 5 };
@@ -138,7 +133,6 @@ process Train01() {
 }
 
 process Gate() {
-
   clock y;
   state
     gate0, gate1 { y <= 1 }, gate2, gate3 { y <= 2 };

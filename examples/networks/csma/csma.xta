@@ -1,7 +1,6 @@
 chan begin, busy, cd13, end, cd7, cd6, cd12, cd4, cd10, cd11, cd5, cd1, cd15, cd14, cd16, cd17, cd18, cd19, cd2, cd20, cd3, cd8, cd9;
 
 process P13() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -46,7 +45,6 @@ process P13() {
 }
 
 process P7() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -91,7 +89,6 @@ process P7() {
 }
 
 process P6() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -136,7 +133,6 @@ process P6() {
 }
 
 process P12() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -181,7 +177,6 @@ process P12() {
 }
 
 process P4() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -226,7 +221,6 @@ process P4() {
 }
 
 process P10() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -271,7 +265,6 @@ process P10() {
 }
 
 process P11() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -316,7 +309,6 @@ process P11() {
 }
 
 process P5() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -361,7 +353,6 @@ process P5() {
 }
 
 process P1() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -406,7 +397,6 @@ process P1() {
 }
 
 process P15() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -451,7 +441,6 @@ process P15() {
 }
 
 process P14() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -496,7 +485,6 @@ process P14() {
 }
 
 process P0() {
-
   clock x;
   state
     bus_idle, bus_active, bus_collision1 { x < 26 }, bus_collision2 { x <= 0 }, bus_collision3 { x <= 0 }, bus_collision4 { x <= 0 }, bus_collision5 { x <= 0 }, bus_collision6 { x <= 0 }, bus_collision7 { x <= 0 }, bus_collision8 { x <= 0 }, bus_collision9 { x <= 0 }, bus_collision10 { x <= 0 }, bus_collision11 { x <= 0 }, bus_collision12 { x <= 0 }, bus_collision13 { x <= 0 }, bus_collision14 { x <= 0 }, bus_collision15 { x <= 0 }, bus_collision16 { x <= 0 }, bus_collision17 { x <= 0 }, bus_collision18 { x <= 0 }, bus_collision19 { x <= 0 }, bus_collision20 { x <= 0 };
@@ -622,7 +610,6 @@ process P0() {
 }
 
 process P16() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -667,7 +654,6 @@ process P16() {
 }
 
 process P2() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -712,7 +698,6 @@ process P2() {
 }
 
 process P3() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -757,7 +742,6 @@ process P3() {
 }
 
 process P17() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -802,7 +786,6 @@ process P17() {
 }
 
 process P19() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -847,7 +830,6 @@ process P19() {
 }
 
 process P18() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -892,7 +874,6 @@ process P18() {
 }
 
 process P8() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -937,7 +918,6 @@ process P8() {
 }
 
 process P20() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };
@@ -982,7 +962,6 @@ process P20() {
 }
 
 process P9() {
-
   clock x;
   state
     sender_wait, sender_transm { x <= 808 }, sender_retry { x < 52 };

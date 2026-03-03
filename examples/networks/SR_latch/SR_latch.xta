@@ -1,7 +1,6 @@
 chan R_Down, S_Down, Q_Down, Q_Up, overQ_Down, overQ_Up;
 
 process Env() {
-
   clock s;
   state
     env_11, env_10 { s <= 1 }, env_final;
@@ -18,7 +17,6 @@ process Env() {
 }
 
 process NorGate01() {
-
   clock ckNor1;
   state
     Nor1_000 { ckNor1 <= 2 }, Nor1_001, Nor1_010, Nor1_011 { ckNor1 <= 2 }, Nor1_100, Nor1_101 { ckNor1 <= 2 }, Nor1_110, Nor1_111 { ckNor1 <= 2 };
@@ -85,7 +83,6 @@ process NorGate01() {
 }
 
 process NorGate02() {
-
   clock ckNor2;
   state
     Nor2_000 { ckNor2 <= 2 }, Nor2_001, Nor2_010, Nor2_011 { ckNor2 <= 2 }, Nor2_100, Nor2_101 { ckNor2 <= 2 }, Nor2_110, Nor2_111 { ckNor2 <= 2 };

@@ -1,7 +1,6 @@
 int InSafety, back, first, second;
 
 process Observer() {
-
   clock y;
   state
     Wait, Escape;
@@ -13,7 +12,6 @@ process Observer() {
 }
 
 process Soldier04() {
-
   clock x;
   state
     Peril, Safety, OnBridge, OnWayBack;
@@ -42,7 +40,6 @@ process Soldier04() {
 }
 
 process Soldier01() {
-
   clock x;
   state
     Peril, Safety, OnBridge, OnWayBack;
@@ -71,7 +68,6 @@ process Soldier01() {
 }
 
 process Soldier03() {
-
   clock x;
   state
     Peril, Safety, OnBridge, OnWayBack;
@@ -100,7 +96,6 @@ process Soldier03() {
 }
 
 process Soldier02() {
-
   clock x;
   state
     Peril, Safety, OnBridge, OnWayBack;
