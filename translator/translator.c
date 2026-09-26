@@ -16,6 +16,7 @@ struct VarEntry *int_head = NULL;
 struct VarEntry *int_tail = NULL;
 bool is_init = false;
 bool is_urg = false;
+bool is_com = false;
 char* invar = NULL;
 
 char* cat(char* s1, char* sep, char* s2) {
@@ -51,12 +52,13 @@ void add_transition(char* source, char* action, char* guard, char* assign, char*
     }
 }
 
-void add_location(char* name, char* inv, bool init, bool urg) {
+void add_location(char* name, char* inv, bool init, bool urg, bool com) {
     struct Location *new_l = malloc(sizeof(struct Location));
     new_l->name = strdup(name);
     new_l->invariant = inv ? strdup(inv) : NULL;
     new_l->is_init = init;
     new_l->is_urg = urg;
+    new_l->is_com = com;
     new_l->next = NULL;
 
     if (loc_tail == NULL) {
@@ -94,13 +96,34 @@ void update_action(char* name, char* marker) {
                 new_type = SYNC_OUTPUT;
             else if (marker && !strcmp(marker, "?"))
                 new_type = SYNC_INPUT;
+            else if (marker && !strcmp(marker, "!!"))
+                new_type = SYNC_BCAST_OUTPUT;
+            else if (marker && !strcmp(marker, "??"))
+                new_type = SYNC_BCAST_INPUT;
 
-            /* check that the action type is consistent inside the automaton: always synchronized or always not */
-            if ((curr->type == SYNC_NONE && (new_type == SYNC_INPUT || new_type == SYNC_OUTPUT)) || ((curr->type == SYNC_INPUT || curr->type == SYNC_OUTPUT) && new_type == SYNC_NONE)) {
-                fprintf(stderr, "Error: Action '%s' has inconsistent markers\n", name);
+            /* first usage of the action in a transition */
+            if (curr->type == SYNC_UNDEFINED) {
+                curr->type = new_type;
+                return;
+            }
+
+            /* check: inconsistent mixing of synchronized and non-synchronized usages */
+            if ((curr->type == SYNC_NONE && new_type != SYNC_NONE) || (curr->type != SYNC_NONE && new_type == SYNC_NONE)) {
+                fprintf(stderr, "Error: Action '%s' cannot be mixed as synchronized and non-synchronized\n", name);
                 exit(1);
             }
-            curr->type = new_type;
+
+            /* check: inconsistent mixing of binary and broadcast channels */
+            bool curr_is_binary = (curr->type == SYNC_INPUT || curr->type == SYNC_OUTPUT);
+            bool new_is_binary  = (new_type == SYNC_INPUT || new_type == SYNC_OUTPUT);
+            bool curr_is_bcast  = (curr->type == SYNC_BCAST_INPUT || curr->type == SYNC_BCAST_OUTPUT);
+            bool new_is_bcast   = (new_type == SYNC_BCAST_INPUT || new_type == SYNC_BCAST_OUTPUT);
+
+            if ((curr_is_binary && new_is_bcast) || (curr_is_bcast && new_is_binary)) {
+                fprintf(stderr, "Error: Action '%s' cannot be used as both binary and broadcast channel\n", name);
+                exit(1);
+            }
+            
             return;
         }
         curr = curr->next;

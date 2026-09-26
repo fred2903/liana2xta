@@ -78,9 +78,9 @@ void add_system(char *name) {
 
 void print_merged_xta() {
     /* 1 - print combined globals, neatly grouped by type */
-    char *types[] = {"int", "chan", "clock"};
+    char *types[] = {"int", "chan", "broadcast chan", "clock"};
     
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         struct GlobalVar *g = global_head;
         bool first = true;
         while (g) {

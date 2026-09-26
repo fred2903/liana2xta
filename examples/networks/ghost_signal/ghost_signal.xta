@@ -1,0 +1,26 @@
+broadcast chan signal;
+
+process Receiver() {
+  clock z;
+  state
+    Idle, Updated;
+  init Idle;
+  trans
+    Idle -> Updated {
+      guard x == 10;
+      sync signal?;
+    };
+}
+
+process Sender() {
+  clock z;
+  state
+    Start, Done;
+  init Start;
+  trans
+    Start -> Done {
+      sync signal!;
+    };
+}
+
+system Receiver, Sender;

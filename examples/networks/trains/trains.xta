@@ -10,8 +10,8 @@ process Train04() {
     train2 -> train3 {
     },
     train3 -> train0 {
-      sync texit?;
       guard x <= 5;
+      sync texit?;
     },
     train1 -> train2 {
       guard x > 2;
@@ -45,27 +45,27 @@ process Controller() {
       assign cnt = cnt + 1;
     },
     controller2 -> controller2 {
-      sync texit!;
       guard cnt > 1;
+      sync texit!;
       assign cnt = cnt - 1;
     },
     controller2 -> controller3 {
-      sync texit!;
       guard cnt == 1;
+      sync texit!;
       assign z = 0, cnt = 0;
     },
     controller3 -> controller0 {
-      sync raise!;
       guard z <= 1;
+      sync raise!;
     },
     controller3 -> controller2 {
-      sync approach!;
       guard z <= 1;
+      sync approach!;
       assign cnt = cnt + 1;
     },
     controller1 -> controller2 {
-      sync lower!;
       guard z == 1;
+      sync lower!;
     };
 }
 
@@ -78,8 +78,8 @@ process Train03() {
     train2 -> train3 {
     },
     train3 -> train0 {
-      sync texit?;
       guard x <= 5;
+      sync texit?;
     },
     train1 -> train2 {
       guard x > 2;
@@ -99,8 +99,8 @@ process Train02() {
     train2 -> train3 {
     },
     train3 -> train0 {
-      sync texit?;
       guard x <= 5;
+      sync texit?;
     },
     train1 -> train2 {
       guard x > 2;
@@ -120,8 +120,8 @@ process Train01() {
     train2 -> train3 {
     },
     train3 -> train0 {
-      sync texit?;
       guard x <= 5;
+      sync texit?;
     },
     train1 -> train2 {
       guard x > 2;

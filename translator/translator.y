@@ -21,9 +21,9 @@ void yyerror(char *s);
     char* sval;
 }
 
-%token CREATE AUTOMATON CLOCKS ACTIONS INTEGERS LOCATIONS TRANSITIONS SYMM INI URG INV LBRACE RBRACE LSQUARE RSQUARE LPAR RPAR COMMA SEMI DCOLON COLON ASSIGN PLUS MINUS MUL DIV OR AND
+%token CREATE AUTOMATON CLOCKS ACTIONS INTEGERS LOCATIONS TRANSITIONS SYMM INI URG COM INV LBRACE RBRACE LSQUARE RSQUARE LPAR RPAR COMMA SEMI DCOLON COLON ASSIGN PLUS MINUS MUL DIV OR AND
 %token <bval> BOOL
-%token <sval> INT LITERAL EXCLAM INTERROG LE GE EQ LT GT
+%token <sval> INT LITERAL EXCLAM DOUBLE_EXCLAM INTERROG DOUBLE_INTERROG LE GE EQ LT GT
 
 %type <sval> guard_rule clock_constraint_list clock_constraint comp_op arithm_expr bool_expr reset_list reset_opt assign_list assign_opt bool_opt assign_expr transition_rule actions_rule io_opt
 
@@ -51,9 +51,9 @@ system /* this rule incorporates a very complex semantic action responsible of m
             }
         }
         
-        /* 2 - print the global channels (only if synchronized) */
+        /* 2 - print binary global channels */
         struct ActionEntry *a_curr = action_head;
-        bool first_chan = true;
+        bool first_chan = true; /* flag to track the first binary channel */
         while (a_curr) {
             if (a_curr->type == SYNC_INPUT || a_curr->type == SYNC_OUTPUT) {
                 if (first_chan) {
@@ -68,12 +68,31 @@ system /* this rule incorporates a very complex semantic action responsible of m
             a_curr = a_curr->next;
         }
         if (!first_chan)
-            printf(";\n");
+            printf(";\n"); /* close the binary channels list if we found any binary channel */
 
-        /* 3 - start the process block */
+        /* 3 - print broadcast global channels */
+        a_curr = action_head;
+        bool first_bcast = true; /* flag to track the first broadcast channel */
+        while (a_curr) {
+            if (a_curr->type == SYNC_BCAST_INPUT || a_curr->type == SYNC_BCAST_OUTPUT) {
+                if (first_bcast) {
+                    printf("broadcast chan ");
+                    first_bcast = false;
+                }
+                else {
+                    printf(", ");
+                }
+                printf("%s", a_curr->name);
+            }
+            a_curr = a_curr->next;
+        }
+        if (!first_bcast)
+            printf(";\n"); /* close the broadcast channels list if we found any broadcast channel */
+
+        /* 4 - start the process block */
         printf("process %s() {\n", $3);
 
-        /* 4 - print local clocks */
+        /* 5 - print local clocks */
         struct VarEntry *c_curr = clock_head;
         if (c_curr) {
             printf("  clock ");
@@ -83,7 +102,7 @@ system /* this rule incorporates a very complex semantic action responsible of m
             }
         }
 
-        /* 5 - print locations with related invariants */
+        /* 6 - print locations with related invariants */
         printf("  state\n    ");
         struct Location *l_curr = loc_head;
         while (l_curr) {
@@ -94,7 +113,7 @@ system /* this rule incorporates a very complex semantic action responsible of m
             printf("%s", l_curr ? ", " : ";\n");
         }
 
-        /* 6 - print urgent declaration */
+        /* 7 - print urgent declaration */
         l_curr = loc_head;
         bool first_urg = true; /* flag to track the first urgent state */
         while (l_curr) {
@@ -110,8 +129,25 @@ system /* this rule incorporates a very complex semantic action responsible of m
         }
         if (!first_urg)
             printf(";\n"); /* close the urgent list if we found any urgent location */
+
+        /* 8 - print committed declaration */
+        l_curr = loc_head;
+        bool first_com = true; /* flag to track the first committed state */
+        while (l_curr) {
+            if (l_curr->is_com) {
+                if (first_com) {
+                    printf("  commit %s", l_curr->name);
+                    first_com = false;
+                }
+                else
+                    printf(", %s", l_curr->name);
+            }
+            l_curr = l_curr->next;
+        }
+        if (!first_com)
+            printf(";\n"); /* close the committed list if we found any committed location */
         
-        /* 7 - print initial declaration */
+        /* 9 - print initial declaration */
         l_curr = loc_head;
         int init_count = 0;
         char* init_name = NULL;
@@ -137,36 +173,50 @@ system /* this rule incorporates a very complex semantic action responsible of m
             printf("  init %s;\n", init_name);
         }
         
-        /* 8 - print transitions */
+        /* 10 - print transitions */
         printf("  trans\n");
         struct Transition *t_curr = trans_head;
         while (t_curr) {
             printf("    %s -> %s {\n", t_curr->source, t_curr->target);
+
+            /* print guard */
+            if (t_curr->guard)
+                printf("      guard %s;\n", t_curr->guard);
             
             /* check if the considered action is synchronized and print it in positive case */
             a_curr = action_head;
             while (a_curr && t_curr->action) {
                 int len = strlen(a_curr->name);
-                /* check if the base name matches and is immediately followed by '!', '?', or '\0' */
-                if (!strncmp(a_curr->name, t_curr->action, len) && (t_curr->action[len] == '\0' || t_curr->action[len] == '!' || t_curr->action[len] == '?')) /* note that in case of '?' or '!' in any position, it must be necessarily the last before the string terminator, otherwise the action is not valid for the declared grammar syntax */
-                    break; /* match found, exit loop */
+                /* check if the base name matches and is immediately followed by '!', '?', '!!', '??', or '\0' */
+                if (!strncmp(a_curr->name, t_curr->action, len)) {
+                    char* suffix = t_curr->action + len;
+                    if (*suffix == '\0' || !strcmp(suffix, "!") || !strcmp(suffix, "?") || !strcmp(suffix, "!!") || !strcmp(suffix, "??"))
+                        break; /* match found, exit loop */
+                }
                 a_curr = a_curr->next;
             }
-            if (a_curr && (a_curr->type == SYNC_INPUT || a_curr->type == SYNC_OUTPUT))
-                printf("      sync %s;\n", t_curr->action);
-            
-            if (t_curr->guard)
-                printf("      guard %s;\n", t_curr->guard);
+            if (a_curr && (a_curr->type == SYNC_INPUT || a_curr->type == SYNC_OUTPUT || a_curr->type == SYNC_BCAST_INPUT || a_curr->type == SYNC_BCAST_OUTPUT)) {
+                /* duplicate action string to convert '!!' and '??' to '!' and '?' */
+                char* sync_str = strdup(t_curr->action);
+                int act_len = strlen(sync_str);
+                if (act_len >= 2 && (!strcmp(sync_str + act_len - 2, "!!") || !strcmp(sync_str + act_len - 2, "??")))
+                    sync_str[act_len - 1] = '\0';
+                printf("      sync %s;\n", sync_str);
+                free(sync_str);
+            }
+
+            /* print assign */
             if (t_curr->assign)
                 printf("      assign %s;\n", t_curr->assign);
+
             printf("    }%s\n", t_curr->next ? "," : ";");
             t_curr = t_curr->next;
         }
 
-        /* 9 - close process and declare system */
+        /* 11 - close process and declare system */
         printf("}\nsystem %s;\n", $3);
 
-        /* 10 - cleanup */
+        /* 12 - cleanup */
         while (int_head) {
             i_curr = int_head;
             int_head = int_head->next;
@@ -279,14 +329,15 @@ location_list
 loc_rule
     : LITERAL 
     {
-        /* reset initial and urgency flag for each location */
+        /* reset initial, urgency and committed flag for each location */
         is_init = false;
         is_urg = false;
+        is_com = false;
     }
     LT loc_props GT
     {   
         /* buffer current location instead of printing it for successive semantic analysis */
-        add_location($1, invar, is_init, is_urg);
+        add_location($1, invar, is_init, is_urg, is_com);
         
         free($1);
         if (invar) {
@@ -299,12 +350,17 @@ loc_rule
 loc_props
     : /* empty */
     | ini
-    | urg
+    | urg_com
     | inv
-    | ini COMMA urg
+    | ini COMMA urg_com
     | ini COMMA inv
-    | urg COMMA inv
-    | ini COMMA urg COMMA inv
+    | urg_com COMMA inv
+    | ini COMMA urg_com COMMA inv
+;
+
+urg_com
+    : urg
+    | com
 ;
 
 ini
@@ -318,6 +374,13 @@ urg
     : URG COLON BOOL
     {
         is_urg = $3;
+    }
+;
+
+com
+    : COM COLON BOOL
+    {
+        is_com = $3;
     }
 ;
 
@@ -383,7 +446,7 @@ io_opt
     {
         $$ = strdup("");
     }
-    | EXCLAM | INTERROG
+    | EXCLAM | INTERROG | DOUBLE_EXCLAM | DOUBLE_INTERROG
     /* default action "$$ = $1;" is sufficient */
 ;
 

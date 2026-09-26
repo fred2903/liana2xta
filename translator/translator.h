@@ -17,6 +17,7 @@ struct Location {
     char *invariant;
     bool is_init;
     bool is_urg;
+    bool is_com;
     struct Location *next;
 };
 
@@ -24,7 +25,9 @@ enum SyncType {
     SYNC_UNDEFINED,
     SYNC_NONE,
     SYNC_INPUT,
-    SYNC_OUTPUT
+    SYNC_OUTPUT,
+    SYNC_BCAST_INPUT,
+    SYNC_BCAST_OUTPUT
 };
 
 struct ActionEntry {
@@ -45,11 +48,12 @@ extern struct VarEntry *clock_head;
 extern struct VarEntry *int_head;
 extern bool is_init;
 extern bool is_urg;
+extern bool is_com;
 extern char* invar;
 
 char* cat(char* s1, char* sep, char* s2);
 void add_transition(char* source, char* action, char* guard, char* assign, char* target);
-void add_location(char* name, char* inv, bool init, bool urg);
+void add_location(char* name, char* inv, bool init, bool urg, bool com);
 void add_action(char* name);
 void update_action(char* name, char* marker);
 void add_clock(char* name);

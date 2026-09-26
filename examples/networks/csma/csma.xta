@@ -23,23 +23,23 @@ process P13() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd13?;
       guard x < 52;
+      sync cd13?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd13?;
       guard x < 52;
+      sync cd13?;
       assign x = 0;
     };
 }
@@ -67,23 +67,23 @@ process P7() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd7?;
       guard x < 52;
+      sync cd7?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd7?;
       guard x < 52;
+      sync cd7?;
       assign x = 0;
     };
 }
@@ -111,23 +111,23 @@ process P6() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd6?;
       guard x < 52;
+      sync cd6?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd6?;
       guard x < 52;
+      sync cd6?;
       assign x = 0;
     };
 }
@@ -155,23 +155,23 @@ process P12() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd12?;
       guard x < 52;
+      sync cd12?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd12?;
       guard x < 52;
+      sync cd12?;
       assign x = 0;
     };
 }
@@ -199,23 +199,23 @@ process P4() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd4?;
       guard x < 52;
+      sync cd4?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd4?;
       guard x < 52;
+      sync cd4?;
       assign x = 0;
     };
 }
@@ -243,23 +243,23 @@ process P10() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd10?;
       guard x < 52;
+      sync cd10?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd10?;
       guard x < 52;
+      sync cd10?;
       assign x = 0;
     };
 }
@@ -287,23 +287,23 @@ process P11() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd11?;
       guard x < 52;
+      sync cd11?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd11?;
       guard x < 52;
+      sync cd11?;
       assign x = 0;
     };
 }
@@ -331,23 +331,23 @@ process P5() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd5?;
       guard x < 52;
+      sync cd5?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd5?;
       guard x < 52;
+      sync cd5?;
       assign x = 0;
     };
 }
@@ -375,23 +375,23 @@ process P1() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd1?;
       guard x < 52;
+      sync cd1?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd1?;
       guard x < 52;
+      sync cd1?;
       assign x = 0;
     };
 }
@@ -419,23 +419,23 @@ process P15() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd15?;
       guard x < 52;
+      sync cd15?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd15?;
       guard x < 52;
+      sync cd15?;
       assign x = 0;
     };
 }
@@ -463,23 +463,23 @@ process P14() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd14?;
       guard x < 52;
+      sync cd14?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd14?;
       guard x < 52;
+      sync cd14?;
       assign x = 0;
     };
 }
@@ -499,112 +499,112 @@ process P0() {
       assign x = 0;
     },
     bus_active -> bus_active {
-      sync busy!;
       guard x >= 26;
+      sync busy!;
     },
     bus_active -> bus_collision1 {
-      sync begin?;
       guard x < 26;
+      sync begin?;
       assign x = 0;
     },
     bus_collision1 -> bus_collision2 {
-      sync cd1!;
       guard x < 26;
+      sync cd1!;
       assign x = 0;
     },
     bus_collision2 -> bus_collision3 {
-      sync cd2!;
       guard x <= 0;
+      sync cd2!;
       assign x = 0;
     },
     bus_collision3 -> bus_collision4 {
-      sync cd3!;
       guard x <= 0;
+      sync cd3!;
       assign x = 0;
     },
     bus_collision4 -> bus_collision5 {
-      sync cd4!;
       guard x <= 0;
+      sync cd4!;
       assign x = 0;
     },
     bus_collision5 -> bus_collision6 {
-      sync cd5!;
       guard x <= 0;
+      sync cd5!;
       assign x = 0;
     },
     bus_collision6 -> bus_collision7 {
-      sync cd6!;
       guard x <= 0;
+      sync cd6!;
       assign x = 0;
     },
     bus_collision7 -> bus_collision8 {
-      sync cd7!;
       guard x <= 0;
+      sync cd7!;
       assign x = 0;
     },
     bus_collision8 -> bus_collision9 {
-      sync cd8!;
       guard x <= 0;
+      sync cd8!;
       assign x = 0;
     },
     bus_collision9 -> bus_collision10 {
-      sync cd9!;
       guard x <= 0;
+      sync cd9!;
       assign x = 0;
     },
     bus_collision10 -> bus_collision11 {
-      sync cd10!;
       guard x <= 0;
+      sync cd10!;
       assign x = 0;
     },
     bus_collision11 -> bus_collision12 {
-      sync cd11!;
       guard x <= 0;
+      sync cd11!;
       assign x = 0;
     },
     bus_collision12 -> bus_collision13 {
-      sync cd12!;
       guard x <= 0;
+      sync cd12!;
       assign x = 0;
     },
     bus_collision13 -> bus_collision14 {
-      sync cd13!;
       guard x <= 0;
+      sync cd13!;
       assign x = 0;
     },
     bus_collision14 -> bus_collision15 {
-      sync cd14!;
       guard x <= 0;
+      sync cd14!;
       assign x = 0;
     },
     bus_collision15 -> bus_collision16 {
-      sync cd15!;
       guard x <= 0;
+      sync cd15!;
       assign x = 0;
     },
     bus_collision16 -> bus_collision17 {
-      sync cd16!;
       guard x <= 0;
+      sync cd16!;
       assign x = 0;
     },
     bus_collision17 -> bus_collision18 {
-      sync cd17!;
       guard x <= 0;
+      sync cd17!;
       assign x = 0;
     },
     bus_collision18 -> bus_collision19 {
-      sync cd18!;
       guard x <= 0;
+      sync cd18!;
       assign x = 0;
     },
     bus_collision19 -> bus_collision20 {
-      sync cd19!;
       guard x <= 0;
+      sync cd19!;
       assign x = 0;
     },
     bus_collision20 -> bus_idle {
-      sync cd20!;
       guard x <= 0;
+      sync cd20!;
       assign x = 0;
     };
 }
@@ -632,23 +632,23 @@ process P16() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd16?;
       guard x < 52;
+      sync cd16?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd16?;
       guard x < 52;
+      sync cd16?;
       assign x = 0;
     };
 }
@@ -676,23 +676,23 @@ process P2() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd2?;
       guard x < 52;
+      sync cd2?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd2?;
       guard x < 52;
+      sync cd2?;
       assign x = 0;
     };
 }
@@ -720,23 +720,23 @@ process P3() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd3?;
       guard x < 52;
+      sync cd3?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd3?;
       guard x < 52;
+      sync cd3?;
       assign x = 0;
     };
 }
@@ -764,23 +764,23 @@ process P17() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd17?;
       guard x < 52;
+      sync cd17?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd17?;
       guard x < 52;
+      sync cd17?;
       assign x = 0;
     };
 }
@@ -808,23 +808,23 @@ process P19() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd19?;
       guard x < 52;
+      sync cd19?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd19?;
       guard x < 52;
+      sync cd19?;
       assign x = 0;
     };
 }
@@ -852,23 +852,23 @@ process P18() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd18?;
       guard x < 52;
+      sync cd18?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd18?;
       guard x < 52;
+      sync cd18?;
       assign x = 0;
     };
 }
@@ -896,23 +896,23 @@ process P8() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd8?;
       guard x < 52;
+      sync cd8?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd8?;
       guard x < 52;
+      sync cd8?;
       assign x = 0;
     };
 }
@@ -940,23 +940,23 @@ process P20() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd20?;
       guard x < 52;
+      sync cd20?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd20?;
       guard x < 52;
+      sync cd20?;
       assign x = 0;
     };
 }
@@ -984,23 +984,23 @@ process P9() {
       assign x = 0;
     },
     sender_transm -> sender_wait {
-      sync end!;
       guard x == 808;
+      sync end!;
       assign x = 0;
     },
     sender_transm -> sender_retry {
-      sync cd9?;
       guard x < 52;
+      sync cd9?;
       assign x = 0;
     },
     sender_retry -> sender_transm {
-      sync begin!;
       guard x < 52;
+      sync begin!;
       assign x = 0;
     },
     sender_retry -> sender_retry {
-      sync cd9?;
       guard x < 52;
+      sync cd9?;
       assign x = 0;
     };
 }

@@ -1,0 +1,18 @@
+process clock_check() {
+  clock z;
+  state
+    Start, Checker, Success, Failure;
+  commit Start, Checker;
+  init Start;
+  trans
+    Start -> Checker {
+      assign z = 0;
+    },
+    Checker -> Success {
+      guard z == 0;
+    },
+    Checker -> Failure {
+      guard z > 0;
+    };
+}
+system clock_check;

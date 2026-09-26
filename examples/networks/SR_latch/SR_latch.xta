@@ -11,8 +11,8 @@ process Env() {
       assign s = 0;
     },
     env_10 -> env_final {
-      sync R_Down!;
       guard s == 1;
+      sync R_Down!;
     };
 }
 
@@ -23,19 +23,19 @@ process NorGate01() {
   init Nor1_100;
   trans
     Nor1_111 -> Nor1_110 {
-      sync Q_Down!;
       guard ckNor1 >= 1;
+      sync Q_Down!;
     },
     Nor1_011 -> Nor1_010 {
-      sync Q_Down!;
       guard ckNor1 >= 1;
+      sync Q_Down!;
     },
     Nor1_110 -> Nor1_100 {
       sync overQ_Down?;
     },
     Nor1_101 -> Nor1_100 {
-      sync Q_Down!;
       guard ckNor1 >= 1;
+      sync Q_Down!;
     },
     Nor1_111 -> Nor1_101 {
       sync overQ_Down?;
@@ -59,8 +59,8 @@ process NorGate01() {
       sync overQ_Down?;
     },
     Nor1_000 -> Nor1_001 {
-      sync Q_Up!;
       guard ckNor1 >= 1;
+      sync Q_Up!;
     },
     Nor1_101 -> Nor1_111 {
       sync overQ_Up?;
@@ -100,16 +100,16 @@ process NorGate02() {
       assign ckNor2 = 0;
     },
     Nor2_101 -> Nor2_100 {
-      sync overQ_Down!;
       guard ckNor2 >= 1;
+      sync overQ_Down!;
     },
     Nor2_000 -> Nor2_001 {
-      sync overQ_Up!;
       guard ckNor2 >= 1;
+      sync overQ_Up!;
     },
     Nor2_111 -> Nor2_110 {
-      sync overQ_Down!;
       guard ckNor2 >= 1;
+      sync overQ_Down!;
     },
     Nor2_111 -> Nor2_011 {
       sync Q_Down?;
@@ -133,8 +133,8 @@ process NorGate02() {
       sync Q_Up?;
     },
     Nor2_011 -> Nor2_010 {
-      sync overQ_Down!;
       guard ckNor2 >= 1;
+      sync overQ_Down!;
     },
     Nor2_001 -> Nor2_101 {
       sync Q_Up?;

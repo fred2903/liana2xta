@@ -1,0 +1,53 @@
+int x;
+broadcast chan signal;
+
+process Checker() {
+  clock z;
+  state
+    Begin, Success;
+  init Begin;
+  trans
+    Begin -> Success {
+      guard x == 12;
+    };
+}
+
+process Receiver1() {
+  clock z;
+  state
+    Idle, Updated;
+  init Idle;
+  trans
+    Idle -> Updated {
+      guard x < 3;
+      sync signal?;
+      assign x = x + 5;
+    };
+}
+
+process Sender() {
+  clock z;
+  state
+    Start, Done;
+  init Start;
+  trans
+    Start -> Done {
+      sync signal!;
+      assign x = x + 2;
+    };
+}
+
+process Receiver2() {
+  clock z;
+  state
+    Idle, Updated;
+  init Idle;
+  trans
+    Idle -> Updated {
+      guard x < 3;
+      sync signal?;
+      assign x = x + 5;
+    };
+}
+
+system Checker, Receiver1, Sender, Receiver2;

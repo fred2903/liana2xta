@@ -1,0 +1,40 @@
+int x;
+chan signal;
+
+process Receiver1() {
+  clock z;
+  state
+    Idle, Updated;
+  commit Idle;
+  init Idle;
+  trans
+    Idle -> Updated {
+      sync signal?;
+      assign x = x + 3;
+    };
+}
+
+process Sender() {
+  clock z;
+  state
+    Start, Done;
+  init Start;
+  trans
+    Start -> Done {
+      sync signal!;
+    };
+}
+
+process Receiver2() {
+  clock z;
+  state
+    Idle, Updated;
+  init Idle;
+  trans
+    Idle -> Updated {
+      sync signal?;
+      assign x = x + 2;
+    };
+}
+
+system Receiver1, Sender, Receiver2;

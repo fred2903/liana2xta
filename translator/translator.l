@@ -31,6 +31,7 @@ ID                  [a-zA-Z_][a-zA-Z0-9_]*
 "symm"              { return SYMM; }
 "ini"               { return INI; }
 "urg"               { return URG; }
+"com"               { return COM; }
 "inv"               { return INV; }
 
 "{"                 { return LBRACE; }
@@ -49,7 +50,9 @@ ID                  [a-zA-Z_][a-zA-Z0-9_]*
 ">"                 { yylval.sval = strdup(yytext); return GT; }
 ":"                 { return COLON; }
 "!"                 { yylval.sval = strdup(yytext); return EXCLAM; }
+"!!"                { yylval.sval = strdup(yytext); return DOUBLE_EXCLAM; }
 "?"                 { yylval.sval = strdup(yytext); return INTERROG; }
+"??"                { yylval.sval = strdup(yytext); return DOUBLE_INTERROG; }
 "="                 { return ASSIGN; }
 "+"                 { return PLUS; }
 "-"                 { return MINUS; }

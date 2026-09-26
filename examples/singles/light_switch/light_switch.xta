@@ -6,13 +6,13 @@ process light_switch() {
   init off;
   trans
     off -> on {
-      sync switch_on!;
       guard x >= 0;
+      sync switch_on!;
       assign x = 0;
     },
     on -> off {
-      sync switch_off?;
       guard x == 2;
+      sync switch_off?;
     };
 }
 system light_switch;

@@ -128,6 +128,7 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
+    char *dir_path = (argc == 2) ? argv[1] : ".";
     struct stat st;
     while ((ent = readdir(dir)) != NULL) {
         /* skip hidden files and directory navigation pointers (. and ..) */
@@ -135,8 +136,8 @@ int main(int argc, char **argv) {
             continue;
         
         /* construct the full path */
-        char *file_path = malloc(strlen(argv[1]) + strlen(ent->d_name) + 2);
-        sprintf(file_path, "%s/%s", argv[1], ent->d_name);
+        char *file_path = malloc(strlen(dir_path) + strlen(ent->d_name) + 2);
+        sprintf(file_path, "%s/%s", dir_path, ent->d_name);
         
         /* check if it is a regular file */
         if (!stat(file_path, &st) && S_ISREG(st.st_mode)) {
